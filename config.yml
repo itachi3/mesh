@@ -1,0 +1,39 @@
+version: 0.1
+
+GraphDB: /Users/G/Documents/Neo4j/default.graphdb
+
+server:
+    applicationConnectors:
+      - type: http
+        port: 8090
+    adminConnectors:
+      - type: http
+        port: 8091
+    requestLog:
+      timeZone: UTC
+      appenders:
+        - type: file
+          currentLogFilename: /var/log/mesh/access.log
+          threshold: ALL
+          archive: true
+          archivedLogFilenamePattern: /var/log/mesh/access-%d{yyyy-MM-dd}-%i.log.gz
+          archivedFileCount: 5
+
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO,
+  # DEBUG, TRACE, or ALL.
+  level: INFO
+
+  loggers:
+    io.dropwizard: ERROR
+
+  appenders:
+    - type: file
+      threshold: ERROR
+      currentLogFilename: /var/log/mesh/error.log
+      logFormat: "%-5level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n %throwable{3}"
+      archive: true
+      archivedLogFilenamePattern: /var/log/mesh/error-%d{yyyy-MM-dd}-%i.log.gz
+      archivedFileCount: 5
+      timeZone: UTC
