@@ -8,6 +8,7 @@ import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 
 import javax.ws.rs.core.Response;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,17 +21,13 @@ public class DeleteDataSource {
     private String path;
     private List<String> keys;
 
-    public DeleteDataSource(GraphDb graphDbInstance, String path, List properties) {
+    public DeleteDataSource(GraphDb graphDbInstance, String path, String properties) {
         this.path = path;
-        this.keys = properties;
+        this.keys = Arrays.asList( properties.split("/") );
         graphDb = graphDbInstance;
     }
 
     public Response delete() {
-        if (ListUtils.isEmptyorNull(keys)) {
-            log.error("Empty request keys");
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        }
 
         try (Transaction deleted = graphDb.getDbService().beginTx()) {
             String properties = "n." + keys.stream().collect(Collectors.joining(", n."));

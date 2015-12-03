@@ -62,8 +62,8 @@ public class UniversalController {
 
     @DELETE
     @Timed
-    public Response deletePreference(@HeaderParam(Constants.USER_AGENT) String userAgent, @QueryParam("path") String path, @QueryParam("keys") List<String> keys) {
-        if (!HeaderUtils.validate(userAgent) || ListUtils.isEmptyorNull(keys)) {
+    public Response deletePreference(@HeaderParam(Constants.USER_AGENT) String userAgent, @QueryParam("path") String path, @QueryParam("keys") String keys) {
+        if (!HeaderUtils.validate(userAgent) || StringUtils.isEmptyorNull(keys)) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
         try {

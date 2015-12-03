@@ -1,6 +1,6 @@
 version: 0.1
 
-GraphDB: /Users/G/Documents/Neo4j/default.graphdb
+GraphDB: /var/Neo4j/default.graphdb
 
 server:
     applicationConnectors:

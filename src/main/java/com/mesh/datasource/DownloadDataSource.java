@@ -27,11 +27,6 @@ public class DownloadDataSource {
     }
 
     public Response download() {
-        if (StringUtils.isEmptyorNull(path)) {
-            log.error("Empty request path");
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        }
-
         Map<String, Object> data = new HashMap<>();
         List<Object> children = new ArrayList<>();
         String query;
